@@ -89,3 +89,7 @@ Quick start
 11. If traffic limit exceeds, email will be sent.
 
 .. image:: docs/alarm_email.png
+
+12. If error especially UNKNOWN APP NAME happens while installing with pip, please upgrade your setuptools.::
+
+    pip install setuptools --upgrade
