@@ -25,7 +25,9 @@ Quick start
         url(r'^traffic/', include('traffic_monitor.urls')),
     ]
 
-4. Run `python manage.py migrate` to create the traffic_monitor models.
+4. Run migrate to create the traffic_monitor models.::
+
+    python manage.py migrate
 
 5. Find out your server's network interface names using Linux command like ifconfig then set the name or names you wish to monitor in your project setting.::
 
@@ -79,3 +81,11 @@ Quick start
 9. Run following command to add CRONJOBS to your system crontab::
 
     python manage.py crontab add
+
+10. Connect <server address>/traffic/ to check current traffic.
+
+.. image:: docs/show_traffic.png
+
+11. If traffic limit exceeds, email will be sent.
+
+.. image:: docs/alarm_email.png
