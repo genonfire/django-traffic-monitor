@@ -7,7 +7,9 @@ django-traffic-monitor is a Django application that eases to monitor server traf
 Quick start
 -----------
 
-1. pip install django-traffic-monitor django-crontab
+1. install with pip::
+
+    pip install django-traffic-monitor django-crontab
 
 2. Add "traffic_monitor" to your INSTALLED_APPS setting like this::
 
@@ -24,7 +26,7 @@ Quick start
 
 4. Run `python manage.py migrate` to create the traffic_monitor models.
 
-5. Find out your server's network interface names using Linux command like ifconfig then set the name or names you wish to monitor in your project setting::
+5. Find out your server's network interface names using Linux command like ifconfig then set the name or names you wish to monitor in your project setting.::
 
     TRAFFIC_MONITOR_INTERFACE_NAMES = 'docker0,p2p1,eth0'
 
@@ -38,7 +40,7 @@ Quick start
     EMAIL_HOST_PASSWORD = 'your_password,
     DEFAULT_FROM_EMAIL = 'your_email_id@gmail.com'
 
-7. (Optional) Set more configurations if you want to change from default:::
+7. (Optional) Set more configurations if you want to change from default.::
 
     # Permission to use: superuser, staff, member, all
     TRAFFIC_MONITOR_PERMISSION = 'staff'
@@ -67,7 +69,7 @@ Quick start
     # If traffic limit exceeds, the next alarm will be sent only if the traffic is more than threshold from previous alarm
     TRAFFIC_MONITOR_ALARM_BYTES_THRESHOLD = 10 * 1024 * 1024 * 1024
 
-8. Add cronjob in your settings.py to collect traffic automatically (i.e. run every 5 minutes)::
+8. Add cronjob in your settings.py to collect traffic automatically. (i.e. run every 5 minutes)::
 
     CRONJOBS = [
         ('*/5 * * * *', 'traffic_monitor.tools.read_bytes', '>> /var/log/cronjob.log'),
