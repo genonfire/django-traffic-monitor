@@ -11,6 +11,6 @@ urlpatterns = [
     url(
         r'^refresh/',
         views.TrafficRefreshView.as_view(),
-        name='refresh'
+        name='refresh_traffic'
     ),
 ]
