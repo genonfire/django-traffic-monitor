@@ -57,16 +57,16 @@ Quick start
     # Alarm From Email
     TRAFFIC_MONITOR_EMAIL_FROM = DEFAULT_FROM_EMAIL
 
-    # Alarm Email To (comma seperated if more than one)
+    # Alarm Email To (comma seperated list, can be more than one)
     TRAFFIC_MONITOR_EMAIL_TO = [DEFAULT_FROM_EMAIL]
 
     # Set False if you do not want to get email
     TRAFFIC_MONITOR_ALARM_SEND_EMAIL = True
 
-    # Subject for email
+    # Subject of email
     TRAFFIC_MONITOR_ALARM_EMAIL_SUBJECT = 'Traffic limit alert'
 
-    # If traffic limit exceeds, the next alarm will be sent only if the traffic is more than threshold from previous alarm
+    # If traffic limit exceeds, the next alarm will be sent only if the traffic exceeds threshold from previous alarm
     TRAFFIC_MONITOR_ALARM_BYTES_THRESHOLD = 10 * 1024 * 1024 * 1024
 
 8. Add cronjob in your settings.py to collect traffic automatically. (i.e. run every 5 minutes)::
