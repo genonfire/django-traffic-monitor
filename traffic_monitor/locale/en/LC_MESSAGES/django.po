@@ -1,0 +1,76 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-12 16:42+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/traffic_monitor/alarm.html:13
+msgid ""
+"Your server has exceeded daily or monthly traffic limit. Please check below "
+"for your traffic status."
+msgstr ""
+
+#: templates/traffic_monitor/alarm.html:21
+#: templates/traffic_monitor/show_traffic.html:14
+msgid "Today"
+msgstr ""
+
+#: templates/traffic_monitor/alarm.html:22
+#: templates/traffic_monitor/show_traffic.html:20
+msgid "This month"
+msgstr ""
+
+#: templates/traffic_monitor/alarm.html:38
+msgid ""
+"This alert is provided by Traffic monitor. Traffic monitor automatically "
+"tracks your traffic and will alert you if you have exceeded traffic limit as "
+"you set in your service settings. To unsubscribe from these alerts or to "
+"change the email address, please visit following link to check README for "
+"more details."
+msgstr ""
+
+#: templates/traffic_monitor/show_traffic.html:2
+msgid "Traffic monitor"
+msgstr ""
+
+#: templates/traffic_monitor/show_traffic.html:27
+msgid "* last updated: "
+msgstr ""
+
+#: templates/traffic_monitor/show_traffic.html:29
+msgid "Refresh"
+msgstr ""
+
+#: templates/traffic_monitor/show_traffic.html:33
+msgid "Summary"
+msgstr ""
+
+#: templates/traffic_monitor/show_traffic.html:38
+msgid "date"
+msgstr ""
+
+#: templates/traffic_monitor/show_traffic.html:39
+msgid "Rx"
+msgstr ""
+
+#: templates/traffic_monitor/show_traffic.html:40
+msgid "Tx"
+msgstr ""
+
+#: templates/traffic_monitor/show_traffic.html:41
+msgid "Total"
+msgstr ""

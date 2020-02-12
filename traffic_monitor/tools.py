@@ -121,7 +121,7 @@ def read_bytes():
 
         For MacOS local testing. DO NOT RUN in real server
         """
-        if not hasattr(settings, 'BASE_DIR'):
+        if hasattr(settings, 'BASE_DIR'):
             base_dir = settings.BASE_DIR
         else:
             base_dir = os.path.dirname(
