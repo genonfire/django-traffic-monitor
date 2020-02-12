@@ -11,10 +11,11 @@ Quick start
 
     pip install django-traffic-monitor django-crontab
 
-2. Add "traffic_monitor" to your INSTALLED_APPS setting like this::
+2. Add "traffic_monitor" and "django-crontab" to your INSTALLED_APPS setting like this::
 
     INSTALLED_APPS = [
         ...
+        'django_crontab',
         'traffic_monitor',
     ]
 
@@ -74,3 +75,7 @@ Quick start
     CRONJOBS = [
         ('*/5 * * * *', 'traffic_monitor.tools.read_bytes', '>> /var/log/cronjob.log'),
     ]
+
+9. Run following command to add CRONJOBS to your system crontab::
+
+    python manage.py crontab add

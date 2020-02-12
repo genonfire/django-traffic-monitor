@@ -4,4 +4,5 @@ include MANIFEST.in
 exclude *.pyc
 recursive-include traffic_monitor/templates *
 recursive-include traffic_monitor/locale *
+recursive-include docs *
 prune traffic_monitor/__pycache__
