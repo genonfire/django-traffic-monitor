@@ -1,0 +1,47 @@
+{% load i18n %}
+{% autoescape off %}
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:640px;margin-left:auto;margin-right:auto;padding-top:15px; padding-bottom:15px;line-height:24px;">
+  <tr>
+    <td style="padding-top:24px;padding-bottom:24px;font-size:18px;">
+      {{ subject }} {{ alert_at }}
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      {% trans "Your server has exceeded daily or monthly traffic limit. Please check below for your traffic status." %}
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="text-align:center;padding-top:48px;padding-bottom:48px">
+        <tr>
+          <td>{% trans 'Today' %}</td>
+          <td>{% trans 'This month' %}</td>
+        </tr>
+        <tr>
+          <td style='padding-top:15px'>
+            <h2>{{ today_total }}</h2>
+          </td>
+          <td style='padding-top:15px'>
+            <h2>{{ month_total }}</h2>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      {% trans 'This alert is provided by Traffic monitor. Traffic monitor automatically tracks your traffic and will alert you if you have exceeded traffic limit as you set in your service settings. To unsubscribe from these alerts or to change the email address, please visit following link to check README for more details.' %}
+    </td>
+  </tr>
+  <tr>
+    <td align="right">
+      <a href="https://github.com/genonfire/django-traffic-monitor">Traffic monitor</a>
+    </td>
+  </tr>
+</table>
+{% endautoescape %}

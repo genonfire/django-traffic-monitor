@@ -1,0 +1,8 @@
+include LICENSE
+include README.rst
+include MANIFEST.in
+exclude *.pyc
+recursive-include traffic_monitor/templates *
+recursive-include traffic_monitor/tests *
+prune traffic_monitor/__pycache__
+prune traffic_monitor/tests/__pycache__
