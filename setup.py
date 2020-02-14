@@ -7,11 +7,11 @@ def read(f):
 
 setup(
     name='django-traffic-monitor',
-    version=0.4,
+    version=0.5,
     url='https://github.com/genonfire/django-traffic-monitor',
     license='MIT',
     description='a Django application that eases to monitor server traffic.',
-    long_description=read('README.rst'),
+    long_description=read('docs/README.rst'),
     author='KJ Kim',
     author_email='gencode.me@gmail.com',
     packages=['traffic_monitor'],

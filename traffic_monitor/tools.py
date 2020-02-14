@@ -154,7 +154,7 @@ def read_bytes():
             tx_bytes -= init_traffic.tx_bytes
 
         instance, _ = models.Traffic.objects.get_or_create(
-            date=timezone.now().date()
+            date=timezone.localtime(timezone.now()).date()
         )
         instance.interface = interfaces
         instance.rx_bytes = rx_bytes - previous_traffic.rx_bytes
