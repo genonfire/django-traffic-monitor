@@ -153,6 +153,7 @@ def read_bytes():
             not previous_traffic.init_data
         ):
             init_traffic = models.Traffic.objects.get_init()
+
             if init_traffic.tx_bytes == 0 and init_traffic.rx_bytes == 0:
                 conf.settings.set_require_init_data(False)
             elif (
@@ -171,8 +172,15 @@ def read_bytes():
             date=timezone.localtime(timezone.now()).date()
         )
         instance.interface = interfaces
-        instance.rx_bytes = rx_bytes - previous_traffic.rx_bytes
-        instance.tx_bytes = tx_bytes - previous_traffic.tx_bytes
+        if (
+            previous_traffic.rx_bytes > rx_bytes or
+            previous_traffic.tx_bytes > tx_bytes
+        ):
+            instance.rx_bytes = rx_bytes
+            instance.tx_bytes = tx_bytes
+        else:
+            instance.rx_bytes = rx_bytes - previous_traffic.rx_bytes
+            instance.tx_bytes = tx_bytes - previous_traffic.tx_bytes
         instance.updated_at = timezone.now()
         instance.save()
 
