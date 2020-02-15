@@ -148,10 +148,24 @@ def read_bytes():
         )
     else:
         previous_traffic = models.Traffic.objects.get_earlier()
-        if not previous_traffic.init_data:
+        if (
+            conf.settings.require_init_data() and
+            not previous_traffic.init_data
+        ):
             init_traffic = models.Traffic.objects.get_init()
-            rx_bytes -= init_traffic.rx_bytes
-            tx_bytes -= init_traffic.tx_bytes
+            if init_traffic.tx_bytes == 0 and init_traffic.rx_bytes == 0:
+                conf.settings.set_require_init_data(False)
+            elif (
+                previous_traffic.tx_bytes > tx_bytes or
+                previous_traffic.rx_bytes > rx_bytes
+            ):
+                init_traffic.rx_bytes = 0
+                init_traffic.tx_bytes = 0
+                init_traffic.save()
+                conf.settings.set_require_init_data(False)
+            else:
+                rx_bytes -= init_traffic.rx_bytes
+                tx_bytes -= init_traffic.tx_bytes
 
         instance, _ = models.Traffic.objects.get_or_create(
             date=timezone.localtime(timezone.now()).date()
