@@ -2,6 +2,10 @@
 django-traffic-monitor
 ======================
 
+.. image:: https://img.shields.io/pypi/v/django-traffic-monitor.svg
+   :target: https://pypi.org/project/django-traffic-monitor/
+
+
 django-traffic-monitor is a Django application that eases to monitor server traffic.
 
 Quick start
