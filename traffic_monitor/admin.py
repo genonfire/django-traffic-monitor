@@ -8,8 +8,9 @@ class UserAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'interface',
-        'rx_bytes',
-        'tx_bytes',
+        'total',
+        'rx_read',
+        'tx_read',
         'date',
         'updated_at',
         'init_data',

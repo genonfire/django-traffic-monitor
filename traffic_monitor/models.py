@@ -17,12 +17,16 @@ class TrafficManager(models.Manager):
         now = timezone.localtime(timezone.now())
         return self.filter(date__year=now.year).filter(init_data=False)
 
-    def create_init(self, interface, rx_bytes=0, tx_bytes=0):
+    def create_init(
+        self, interface, rx_bytes=0, tx_bytes=0, rx_read=0, tx_read=0
+    ):
         yesterday = (timezone.now() - timezone.timedelta(days=1)).date()
         instance = self.create(
             interface=interface,
             rx_bytes=rx_bytes,
             tx_bytes=tx_bytes,
+            rx_read=rx_read,
+            tx_read=tx_read,
             date=yesterday,
             init_data=True
         )
@@ -42,6 +46,8 @@ class Traffic(models.Model):
     interface = models.CharField(max_length=254)
     rx_bytes = models.BigIntegerField(default=0)
     tx_bytes = models.BigIntegerField(default=0)
+    rx_read = models.BigIntegerField(default=0)
+    tx_read = models.BigIntegerField(default=0)
     date = models.DateField(unique=True)
     updated_at = models.DateTimeField(default=timezone.now)
     init_data = models.BooleanField(default=False)

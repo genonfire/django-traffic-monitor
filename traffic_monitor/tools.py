@@ -102,7 +102,7 @@ def read_bytes():
     if not interfaces:
         raise AttributeError("Interfaces must be presented.")
 
-    rx_bytes = tx_bytes = 0
+    rx_read = tx_read = 0
 
     system = platform.system()
     if system == 'Linux':
@@ -110,9 +110,9 @@ def read_bytes():
             path = '/sys/class/net/%s/statistics/' % interface
             try:
                 with open(os.path.join(path, "rx_bytes")) as f:
-                    rx_bytes += int(f.read())
+                    rx_read += int(f.read())
                 with open(os.path.join(path, "tx_bytes")) as f:
-                    tx_bytes += int(f.read())
+                    tx_read += int(f.read())
             except IOError:
                 print('Failed to open file from %s' % path)
     elif system == 'Darwin' and settings.DEBUG:
@@ -132,9 +132,9 @@ def read_bytes():
             path = os.path.join(base_dir, ('.net/%s/' % interface))
             try:
                 with open(os.path.join(path, "rx_bytes")) as f:
-                    rx_bytes += int(f.read())
+                    rx_read += int(f.read())
                 with open(os.path.join(path, "tx_bytes")) as f:
-                    tx_bytes += int(f.read())
+                    tx_read += int(f.read())
             except IOError:
                 print('Failed to open file from %s' % path)
     else:
@@ -143,44 +143,29 @@ def read_bytes():
     if not models.Traffic.objects.exists():
         models.Traffic.objects.create_init(
             interface=interfaces,
-            rx_bytes=rx_bytes,
-            tx_bytes=tx_bytes
+            rx_read=rx_read,
+            tx_read=tx_read
         )
     else:
         previous_traffic = models.Traffic.objects.get_earlier()
-        if (
-            conf.settings.require_init_data() and
-            not previous_traffic.init_data
-        ):
-            init_traffic = models.Traffic.objects.get_init()
-
-            if init_traffic.tx_bytes == 0 and init_traffic.rx_bytes == 0:
-                conf.settings.set_require_init_data(False)
-            elif (
-                previous_traffic.tx_bytes > tx_bytes or
-                previous_traffic.rx_bytes > rx_bytes
-            ):
-                init_traffic.rx_bytes = 0
-                init_traffic.tx_bytes = 0
-                init_traffic.save()
-                conf.settings.set_require_init_data(False)
-            else:
-                rx_bytes -= init_traffic.rx_bytes
-                tx_bytes -= init_traffic.tx_bytes
 
         instance, _ = models.Traffic.objects.get_or_create(
             date=timezone.localtime(timezone.now()).date()
         )
         instance.interface = interfaces
+        instance.rx_read = rx_read
+        instance.tx_read = tx_read
+
         if (
-            previous_traffic.rx_bytes > rx_bytes or
-            previous_traffic.tx_bytes > tx_bytes
+            previous_traffic.rx_read > rx_read or
+            previous_traffic.tx_read > tx_read
         ):
-            instance.rx_bytes = rx_bytes
-            instance.tx_bytes = tx_bytes
+            instance.rx_bytes = rx_read
+            instance.tx_bytes = tx_read
         else:
-            instance.rx_bytes = rx_bytes - previous_traffic.rx_bytes
-            instance.tx_bytes = tx_bytes - previous_traffic.tx_bytes
+            instance.rx_bytes = rx_read - previous_traffic.rx_read
+            instance.tx_bytes = tx_read - previous_traffic.tx_read
+
         instance.updated_at = timezone.now()
         instance.save()
 

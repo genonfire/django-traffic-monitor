@@ -24,7 +24,6 @@ class Settings(object):
             self._settings[key] = getattr(django_settings, key, default)
 
         self.last_total_bytes = 0
-        self.load_init_data = True
 
     def reload(self):
         self.__init__()
@@ -40,12 +39,6 @@ class Settings(object):
 
     def set_last_total_bytes(self, total_bytes):
         self.last_total_bytes = total_bytes
-
-    def require_init_data(self):
-        return self.load_init_data
-
-    def set_require_init_data(self, value):
-        self.load_init_data = value
 
 
 settings = Settings()
