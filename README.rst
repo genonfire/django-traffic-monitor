@@ -26,18 +26,24 @@ Quick start
 3. Include the traffic_monitor URLconf in your project urls.py like this::
 
     urlpatterns += [
-        url(r'^traffic/', include('traffic_monitor.urls')),
+        path('traffic/', include('traffic_monitor.urls', namespace='traffic_monitor'))
+    ]
+    
+3-1. If you are more of url person than path
+
+    urlpatterns += [
+        url(r'^traffic/', include('traffic_monitor.urls'), namespace='traffic_monitor')),
     ]
 
 4. Run migrate to create the traffic_monitor models.::
 
     python manage.py migrate
 
-5. Find out your server's network interface names using Linux command like ifconfig then set the name or names you wish to monitor in your project setting.::
+5. Find out your server's network interface names using Linux command like ifconfig then set the name or names you wish to monitor in your project setting such as settings.py.::
 
     TRAFFIC_MONITOR_INTERFACE_NAMES = 'docker0,p2p1,eth0'
 
-6. Email setting required for Django. If sending email in your project is currently working, no need to change it.::
+6. Email setting required for Django. If sending email in your project is currently working, no need to change it or add it to your settings.::
 
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = 'smtp.gmail.com',
