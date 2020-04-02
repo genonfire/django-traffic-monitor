@@ -29,7 +29,7 @@ Quick start
         path('traffic/', include('traffic_monitor.urls', namespace='traffic_monitor'))
     ]
     
-3-1. If you are more of url person than path
+3-1. If you are more of url person than path::
 
     urlpatterns += [
         url(r'^traffic/', include('traffic_monitor.urls'), namespace='traffic_monitor')),
