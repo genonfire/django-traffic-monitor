@@ -2,13 +2,16 @@
 django-traffic-monitor
 ======================
 
-|PyPi|_ |Downloads|_
+|PyPi|_ |Downloads|_ |LGTM|_
 
 .. |PyPi| image:: https://img.shields.io/pypi/v/django-traffic-monitor.svg
 .. _PyPi: https://pypi.org/project/django-traffic-monitor/
 
 .. |Downloads| image:: https://pepy.tech/badge/django-traffic-monitor
 .. _Downloads: https://pepy.tech/project/django-traffic-monitor
+
+.. |LGTM| image:: https://img.shields.io/lgtm/grade/python/g/genonfire/django-traffic-monitor.svg?logo=lgtm&logoWidth=18
+.. _LGTM: https://lgtm.com/projects/g/genonfire/django-traffic-monitor
 
 
 django-traffic-monitor is a Django application that eases to monitor server traffic.
