@@ -11,7 +11,8 @@ class TrafficManager(models.Manager):
 
     def this_month(self):
         now = timezone.localtime(timezone.now())
-        return self.filter(date__month=now.month).filter(init_data=False)
+        return self.filter(date__year=now.year).filter(
+            date__month=now.month).filter(init_data=False)
 
     def this_year(self):
         now = timezone.localtime(timezone.now())

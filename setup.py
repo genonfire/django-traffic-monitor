@@ -7,7 +7,7 @@ def read(f):
 
 setup(
     name='django-traffic-monitor',
-    version=1.1,
+    version=1.2,
     url='https://github.com/genonfire/django-traffic-monitor',
     license='MIT',
     description='a Django application that eases to monitor server traffic.',
