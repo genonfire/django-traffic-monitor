@@ -7,7 +7,7 @@ def read(f):
 
 setup(
     name='django-traffic-monitor',
-    version=1.2,
+    version=1.3,
     url='https://github.com/genonfire/django-traffic-monitor',
     license='MIT',
     description='a Django application that eases to monitor server traffic.',
@@ -32,6 +32,7 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'Topic :: Internet :: WWW/HTTP',
     ],
 )

@@ -6,7 +6,6 @@ from django.core.mail import (
 )
 from django.template.loader import render_to_string
 
-from . import wrapper
 from . import conf
 
 
@@ -20,7 +19,6 @@ class _EmailHelper(object):
             data.append(recipient.strip())
         return data
 
-    @wrapper.async_func
     def _send(
         self, subject, body, from_email=None, to=None, bcc=None, cc=None,
         html_subject=None, html_body=None, attachment=None, filename=None,

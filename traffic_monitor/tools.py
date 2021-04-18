@@ -44,6 +44,7 @@ def print_unit(x_bytes):
 
 def skip_alarm(total_bytes):
     if not conf.settings.TRAFFIC_MONITOR_ALARM_SEND_EMAIL:
+        print('SKIP: TRAFFIC_MONITOR_ALARM_SEND_EMAIL.')
         return SKIP
 
     last_total_bytes = conf.settings.get_last_total_bytes()
@@ -52,11 +53,20 @@ def skip_alarm(total_bytes):
     if total_bytes > last_total_bytes + bytes_threshold:
         return DO_NOT_SKIP
 
+    print('SKIP: %s < %s + %s' % (
+        print_unit(total_bytes),
+        print_unit(last_total_bytes),
+        print_unit(bytes_threshold)
+    ))
     return SKIP
 
 
 def send_email_alarm(today_total, month_total):
     subject = conf.settings.TRAFFIC_MONITOR_ALARM_EMAIL_SUBJECT
+    today_unit = print_unit(today_total)
+    month_unit = print_unit(month_total)
+
+    print('code yellow today(%s), month(%s)' % (today_unit, month_unit))
 
     EmailHelper.send(
         subject=subject,
@@ -65,8 +75,8 @@ def send_email_alarm(today_total, month_total):
         context={
             'subject': subject,
             'alert_at': timezone.now(),
-            'today_total': print_unit(today_total),
-            'month_total': print_unit(month_total),
+            'today_total': today_unit,
+            'month_total': month_unit,
         }
     )
 
@@ -80,6 +90,12 @@ def check_traffic_limit(today_total):
     daily_limit = conf.settings.TRAFFIC_MONITOR_DAILY_ALARM_BYTES
     monthly_limit = conf.settings.TRAFFIC_MONITOR_MONTHLY_ALARM_BYTES
     code_yellow = False
+
+    print('today(%s), limit(%s/%s)' % (
+        print_unit(today_total),
+        print_unit(daily_limit),
+        print_unit(monthly_limit)
+    ))
 
     if daily_limit > 0:
         if today_total > daily_limit:
