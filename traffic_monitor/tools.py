@@ -48,6 +48,9 @@ def skip_alarm(total_bytes):
         return SKIP
 
     last_total_bytes = conf.settings.get_last_total_bytes()
+    if last_total_bytes == 0:
+        return DO_NOT_SKIP
+
     bytes_threshold = conf.settings.TRAFFIC_MONITOR_ALARM_BYTES_THRESHOLD
 
     if total_bytes > last_total_bytes + bytes_threshold:
@@ -165,12 +168,15 @@ def read_bytes():
     else:
         previous_traffic = models.Traffic.objects.get_earlier()
 
-        instance, _ = models.Traffic.objects.get_or_create(
+        instance, created = models.Traffic.objects.get_or_create(
             date=timezone.localtime(timezone.now()).date()
         )
         instance.interface = interfaces
         instance.rx_read = rx_read
         instance.tx_read = tx_read
+
+        if created:
+            conf.settings.set_last_total_bytes(0)
 
         if (
             previous_traffic.rx_read > rx_read or
